@@ -24,6 +24,8 @@ dependencies:
   google_fonts: ^1.1.2
   hexcolor: ^1.0.6
   dio: ^3.0.10
+  ionicons: any
+  shared_preferences: any
   firebase_core: "^0.7.0"
   firebase_auth: "^0.20.1"
   google_sign_in: "^4.5.1"

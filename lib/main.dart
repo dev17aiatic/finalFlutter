@@ -1,7 +1,9 @@
+import 'package:app1/view/favorites_page.dart';
 import 'package:app1/view/login_page.dart';
 import 'package:app1/view/news_page.dart';
 import 'package:app1/view/register.dart';
 import 'package:app1/view/verification.dart';
+import 'package:app1/view/view_more.dart';
 import 'package:flutter/material.dart';
 import 'package:app1/util/firebaseController.dart' as firebaseAuth;
 
@@ -29,6 +31,11 @@ class _MyAppState extends State<MyApp> {
             return MaterialPageRoute(builder: (context) => new LoginPage());
           case '/news':
             return MaterialPageRoute(builder: (context) => new NewsPage());
+          case '/preview':
+            return MaterialPageRoute(
+                builder: (context) => new Preview(settings.arguments));
+          case '/favorites':
+            return MaterialPageRoute(builder: (context) => new Favorites());
           case '/register':
             return MaterialPageRoute(builder: (context) => new RegisterUser());
           case '/verification':

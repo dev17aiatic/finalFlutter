@@ -46,7 +46,16 @@ class _NewsPageState extends State<NewsPage> {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 10),
-            child: Icon(Icons.favorite),
+            //child: Icon(Icons.favorite),
+            child: IconButton(
+                icon: Icon(Icons.favorite),
+                onPressed: () {
+                  setState(() {
+                    Navigator.pushNamed(context, '/favorites');
+                  });
+
+                  //widget.onTapFav(widget.news);
+                }),
           )
         ],
       ),

@@ -1,11 +1,22 @@
+import 'dart:convert';
+
 import 'package:app1/models/news.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ionicons/ionicons.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class NewsCard extends StatelessWidget {
+class NewsCard extends StatefulWidget {
   final News news;
   final Function(News) onTapFav;
   NewsCard({Key key, @required this.news, this.onTapFav}) : super(key: key);
+
+  @override
+  _NewsCardState createState() => _NewsCardState();
+}
+
+class _NewsCardState extends State<NewsCard> {
+  bool pressHeart = false;
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +41,8 @@ class NewsCard extends StatelessWidget {
                     topLeft: Radius.circular(10)),
                 image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: news.urlToImage != null
-                        ? NetworkImage(news.urlToImage)
+                    image: widget.news.urlToImage != null
+                        ? NetworkImage(widget.news.urlToImage)
                         : AssetImage('assets/img/backbit.png'))),
           ),
           Flexible(
@@ -40,13 +51,13 @@ class NewsCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(news.title ?? 'Title not find',
+                  Text(widget.news.title ?? 'Title not find',
                       maxLines: 3,
                       style: GoogleFonts.signika(
                           fontSize: 20,
                           color: Colors.black,
                           fontWeight: FontWeight.bold)),
-                  Text(news.author ?? 'Author not find',
+                  Text(widget.news.author ?? 'Author not find',
                       style: GoogleFonts.signika(
                           fontSize: 14,
                           color: Colors.black45,
@@ -54,7 +65,7 @@ class NewsCard extends StatelessWidget {
                   Container(
                     height: 10,
                   ),
-                  Text(news.description ?? 'Description not find',
+                  Text(widget.news.description ?? 'Description not find',
                       maxLines: 3,
                       style: GoogleFonts.signika(
                           fontSize: 12,
@@ -72,12 +83,24 @@ class NewsCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                      icon: Icon(Icons.favorite_border_outlined),
-                      onPressed: () {
-                        onTapFav(news);
-                      }),
+                    //icon: Icon(Icons.favorite_border_outlined),
+                    icon: pressHeart != true
+                        ? Icon(Icons.favorite_border_outlined)
+                        : Icon(Icons.favorite),
+                    onPressed: () {
+                      setState(() {
+                        pressHeart = !pressHeart;
+                        _saveFavoriteList(snapshotReceive: widget.news);
+                      });
+
+                      //widget.onTapFav(widget.news);
+                    },
+                  ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, '/preview',
+                          arguments: widget.news);
+                    },
                     child: Text(
                       'MORE',
                       style: GoogleFonts.signika(
@@ -93,5 +116,15 @@ class NewsCard extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  _saveFavoriteList({@required News snapshotReceive}) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    List<String> FavoriteList = prefs.getStringList('FavoriteList') ?? [];
+
+    FavoriteList.add(json.encode(snapshotReceive.source.toJson()));
+
+    await prefs.setStringList('FavoriteList', FavoriteList);
   }
 }
