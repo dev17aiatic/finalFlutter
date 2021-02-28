@@ -61,14 +61,6 @@ class _NewsPageState extends State<NewsPage> {
                     'https://bit.institute/images/Instituto-Cursos-Programacion.png'),
               ),
             ),
-            ListTile(
-              title: Text(
-                'News category',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
             ...drawerOptions
                 .map((option) => DrawerOption(
                       text: option['text'],

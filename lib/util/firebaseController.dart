@@ -9,14 +9,23 @@ void Initialing() async {
 void stateFirebase(context) {
   FirebaseAuth.instance.authStateChanges().listen((
     User user,
-  ) {
+  ) async {
     if (user == null) {
       print('User is currently signed out!');
-      Navigator.pushNamed(context, '/login');
+      Navigator.pushReplacementNamed(context, '/login');
     } else {
       print('User is signed in!');
       //Navigator.pushReplacementNamed(context, '/news');
-      Navigator.pushNamed(context, '/news');
+      User user = FirebaseAuth.instance.currentUser;
+
+      if (!user.emailVerified) {
+        //await user.sendEmailVerification();
+        //Navigator.pushNamed(context, '/verification');
+        Navigator.pushReplacementNamed(context, '/verification');
+      } else {
+        //Navigator.pushNamed(context, '/news');
+        Navigator.pushReplacementNamed(context, '/news');
+      }
     }
   });
 }
@@ -67,6 +76,28 @@ Future<void> registerUser(
       message: e,
     );
   }
+}
+
+void sendVerifyEmail(context) {
+  FirebaseAuth.instance.authStateChanges().listen((
+    User user,
+  ) async {
+    if (user == null) {
+    } else {
+      print('User is signed in!');
+      //Navigator.pushReplacementNamed(context, '/news');
+      User user = FirebaseAuth.instance.currentUser;
+
+      if (!user.emailVerified) {
+        await user.sendEmailVerification();
+        //Navigator.pushNamed(context, '/verification');
+        Navigator.pushReplacementNamed(context, '/verification');
+      } else {
+        //Navigator.pushNamed(context, '/news');
+        Navigator.pushReplacementNamed(context, '/news');
+      }
+    }
+  });
 }
 
 Future<void> signIn(

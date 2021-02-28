@@ -139,6 +139,7 @@ class _RegisterUserState extends State<RegisterUser> {
                                 _textEditingControllerEmail.text,
                                 _textEditingControllerPassword.text,
                                 context);
+                            ControllerAuth.sendVerifyEmail(context);
                             ControllerAuth.stateFirebase(context);
                           });
                         },

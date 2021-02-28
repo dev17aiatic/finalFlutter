@@ -1,6 +1,7 @@
 import 'package:app1/view/login_page.dart';
 import 'package:app1/view/news_page.dart';
 import 'package:app1/view/register.dart';
+import 'package:app1/view/verification.dart';
 import 'package:flutter/material.dart';
 import 'package:app1/util/firebaseController.dart' as firebaseAuth;
 
@@ -30,6 +31,9 @@ class _MyAppState extends State<MyApp> {
             return MaterialPageRoute(builder: (context) => new NewsPage());
           case '/register':
             return MaterialPageRoute(builder: (context) => new RegisterUser());
+          case '/verification':
+            return MaterialPageRoute(
+                builder: (context) => new Verification_page());
           default:
             return null;
         }
