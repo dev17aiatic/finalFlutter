@@ -38,6 +38,7 @@ dependencies:
   cupertino_icons: ^1.0.0
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.7.4
   flutter_test:
     sdk: flutter
 
@@ -88,3 +89,7 @@ flutter:
     - assets/img/backbit.png
     - assets/img/BitLogo.png
 
+flutter_icons:
+  image_path: 'assets/img/icon.jpg'
+  android: true
+  ios: true
