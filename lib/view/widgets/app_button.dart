@@ -6,6 +6,7 @@ class AppButton extends StatelessWidget {
   final Function onPressed;
   final double height;
   final double width;
+  final Color color;
 
   const AppButton({
     Key key,
@@ -13,6 +14,7 @@ class AppButton extends StatelessWidget {
     @required this.onPressed,
     this.height = 50,
     this.width = 250,
+    this.color = Colors.white,
   }) : super(key: key);
 
   @override
@@ -27,7 +29,7 @@ class AppButton extends StatelessWidget {
           style: TextStyle(fontSize: 24),
           textAlign: TextAlign.center,
         ),
-        color: Colors.white,
+        color: color,
         shape: RoundedRectangleBorder(
           side: BorderSide(color: Colors.grey),
           borderRadius: BorderRadius.all(

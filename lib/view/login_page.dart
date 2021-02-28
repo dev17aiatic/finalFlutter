@@ -159,6 +159,24 @@ class _LoginPageState extends State<LoginPage> {
                           //Navigator.pushReplacementNamed(context, '/news');
                         },
                       ),
+                    ),
+                    Align(
+                      alignment: Alignment.center,
+                      heightFactor: 1.5,
+                      child: AppButton(
+                        color: Colors.red,
+                        height: 60,
+                        text: 'LOG IN WITH GOOGLE',
+                        onPressed: () {
+                          print('Presionando...');
+                          setState(() {
+                            print(_textEditingControllerEmail.text);
+                            ControllerAuth.signInWithGoogle(context);
+                            //ControllerAuth.stateFirebase(context);
+                          });
+                          //Navigator.pushReplacementNamed(context, '/news');
+                        },
+                      ),
                     )
                   ],
                 ),
