@@ -53,19 +53,22 @@ class _NewsPageState extends State<NewsPage> {
       drawer: Drawer(
         child: Column(
           children: [
+            DrawerHeader(
+              child: CircleAvatar(
+                radius: 70,
+                backgroundColor: Colors.white,
+                child: Image.network(
+                    'https://bit.institute/images/Instituto-Cursos-Programacion.png'),
+              ),
+            ),
             ListTile(
               title: Text(
                 'News category',
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-            DrawerHeader(
-                child: CircleAvatar(
-              radius: 70,
-              backgroundColor: Colors.white,
-              child: Image.network(
-                  'https://bit.institute/images/Instituto-Cursos-Programacion.png'),
-            )),
             ...drawerOptions
                 .map((option) => DrawerOption(
                       text: option['text'],
@@ -80,6 +83,14 @@ class _NewsPageState extends State<NewsPage> {
             Divider(
               thickness: 2,
               color: Colors.lightBlue,
+            ),
+            ListTile(
+              title: Text(
+                'Settings',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
             Align(
               child: AppButton(
